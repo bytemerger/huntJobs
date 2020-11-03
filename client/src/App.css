@@ -1,38 +1,52 @@
-.App {
+.dez-bnr-inr{
+  background-image: url(./image/slide2.jpg);
+  padding-bottom: 3em;
+}
+.dez-bnr-inr .container {
+  display: table;
+  height: 100%;
+}
+.container {
+  max-width: 540px;
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dez-bnr-inr-entry {
+  display: table-cell;
+  vertical-align: middle;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.find-job-bx h2 {
+  font-size: 24px;
+  line-height: 33px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.find-job-bx h2 {
+  font-size: 45px;
+  line-height: 60px;
+  font-weight: 500;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h2 {
+  font-size: 30px;
+  line-height: 38px;
+  margin-bottom: 25px;
 }
-
-.App-link {
-  color: #61dafb;
+.find-job-bx form {
+  padding: 30px 30px 30px 30px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.find-job-bx form {
+  padding: 30px 30px 5px 30px;
+  background-color: rgba(255,255,255,0.95);
+  border-radius: 4px;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
+}
+.site-button.btn-block{
+  border-radius: 10px;
+  color: azure;
+  background-color: #424242;
 }
