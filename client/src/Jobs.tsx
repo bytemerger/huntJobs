@@ -1,11 +1,13 @@
 import React from "react";
 import {Grid} from "@material-ui/core"
-
+import {JobType} from "./Job"
+import {Job} from "./Job"
 interface props<T> {
-    jobs: T
+    jobs: T[]
   }
-  
- const Jobs: React.FC<props<Object>> = ({jobs})=> {
+ const Jobs: React.FC<props<JobType>> = ({jobs})=> {
+  const [open,setOpen] = React.useState(false)
+  const [selectedJob,selectJob] = React.useState<JobType>()
     return (
      <div>
         <div className="dez-bnr-inr dez-bnr-inr-md">
@@ -44,6 +46,15 @@ interface props<T> {
 				</div>
             </div>
         </div>
+        {
+          jobs.map((job)=>{
+            <Job {...job} handleOnClick={e => {
+              e.preventDefault();
+              setOpen(true)
+              selectJob(job);
+            }}></Job>
+          })
+        }
       </div> 
     );
   }
