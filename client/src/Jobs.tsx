@@ -2,14 +2,26 @@ import React from "react";
 import {Grid} from "@material-ui/core"
 import {JobType} from "./Job"
 import {Job} from "./Job"
+import JobModal from "./JobModal"
 interface props<T> {
     jobs: T[]
   }
  const Jobs: React.FC<props<JobType>> = ({jobs})=> {
   const [open,setOpen] = React.useState(false)
-  const [selectedJob,selectJob] = React.useState<JobType>()
+  const starter: JobType = {
+	  title:"",
+	  company:"",
+	  description:"",
+	  url:""
+  }
+  const [selectedJob,selectJob] = React.useState<JobType>(starter)
     return (
      <div>
+		<JobModal open={open} job={selectedJob} handleClose={e=>{
+			e.preventDefault();
+			setOpen(false);
+			selectJob(starter);
+		}} />
         <div className="dez-bnr-inr dez-bnr-inr-md">
             <div className="container">
                 <div className="dez-bnr-inr-entry align-m ">
@@ -47,7 +59,7 @@ interface props<T> {
             </div>
         </div>
         {
-          jobs.map((job)=>{
+          jobs.forEach((job)=>{
             <Job {...job} handleOnClick={e => {
               e.preventDefault();
               setOpen(true)
