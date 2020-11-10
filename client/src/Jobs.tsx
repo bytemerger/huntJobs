@@ -59,13 +59,13 @@ interface props<T> {
             </div>
         </div>
         {
-          jobs.forEach((job)=>{
-            <Job {...job} handleOnClick={e => {
+          jobs.map((job: JobType,i:number)=>(
+            <Job key={i} {...job} handleOnClick={e => {
               e.preventDefault();
               setOpen(true)
               selectJob(job);
-            }}></Job>
-          })
+			}}>i</Job>
+			))
         }
       </div> 
     );

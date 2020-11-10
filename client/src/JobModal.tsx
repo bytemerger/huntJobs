@@ -40,7 +40,7 @@ const Transition = React.forwardRef(function Transition(
             <DialogContentText 
                 id="alert-dialog-slide-description"
             >
-              <Chip size="small" label={`from ${job.source}`} />
+              <Chip size="small" label={`from ${job.company}`} />
             </DialogContentText>
             <DialogContentText 
                 id="alert-dialog-slide-description"
