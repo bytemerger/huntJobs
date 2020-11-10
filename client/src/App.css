@@ -58,7 +58,12 @@ h2 {
   padding: 20px 10px;
   align-items: center;
 }
-
+.listCount{
+  margin: 0 auto;
+  margin: 20px 20%;
+  padding: 20px 10px;
+  align-items: center;
+}
 .job:hover {
   cursor: pointer;
   color: #666666;
