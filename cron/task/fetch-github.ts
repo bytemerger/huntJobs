@@ -1,4 +1,10 @@
 import fetch from 'node-fetch';
+import * as redis from 'redis'
+
+const client = redis.createClient();
+import { promisify } from "util";
+const getAsync = promisify(client.get).bind(client);
+const setAsync = promisify(client.set).bind(client);
 
 interface JobType {
     id: string
@@ -31,5 +37,7 @@ async function fetchGithubJobs(){
        
         console.log(jobsList)
     }
+    let success = await setAsync('github',JSON.stringify(jobsList))
+    console.log({success})
 }
 export default fetchGithubJobs;
