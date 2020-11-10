@@ -22,7 +22,7 @@ const baseUrl = "https://jobs.github.com/positions.json"
 async function fetchGithubJobs(){
 
     let resultCount = 1
-    let pageCount = 0;
+    let pageCount = 1;
     let jobsList:Array<JobType> = []
     while(resultCount > 0){
         try{
