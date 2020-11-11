@@ -17,29 +17,77 @@ const useStyles = makeStyles({
 	  margin: `0 auto`
 	},
   });
-
 interface props<T> {
     jobs: T[]
   }
  const Jobs: React.FC<props<JobType>> = ({jobs})=> {
   const [open,setOpen] = React.useState(false)
+  const [select,setSelect] = React.useState("all")
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [searchString, setSearchString] = React.useState('')
 
+  //handle the type change for the options all|remote
+  function handleTypeChange(e: React.ChangeEvent<HTMLSelectElement>){
+	e.preventDefault();
+	let type = e.target.value;
+	setActiveStep(0);
+	setSelect(type);
+  }
   const classes = useStyles();
   const theme = useTheme();
+ 
+  //let jobs = jobs.slice(activeStep*50,(activeStep*50) + 50)
+  // function to scroll to the top
+  function scrollToTop () {
+	const c = document.documentElement.scrollTop || document.body.scrollTop;
+	if (c > 0) {
+	  window.requestAnimationFrame(scrollToTop);
+	  window.scrollTo(0, c - c / 8);
+	}
+  };
 
-  const numJobs = jobs.length;
-  const numOfSteps = Math.ceil(numJobs/50)
-  
-  const [activeStep, setActiveStep] = React.useState(0);
+  let jobsList = jobs.filter( job => {
+	  if (select === 'all'){
+		  return true
+	  }
+		const jobTitle = job.title.toLowerCase()
+		const location = job.location?.toLowerCase()
+		if(jobTitle.includes(`${select}`)){
+			return true;
+		} 
+		else if(location?.includes(`${select}`)){
+			return true;
+		} 
+		return false
+	  });
+//handle input search change
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>){
+	e.preventDefault();
+	setSearchString(e.target.value);
+	console.log(searchString)
+  }
 
-  let jobsList = jobs.slice(activeStep*50,(activeStep*50) + 50)
+  //search for the jobs related with the search string
+  if (searchString !== ''){
+	jobsList = jobsList.filter(job=>{
+		const jobTitle = job.title.toLowerCase()
+		if (jobTitle.includes(`${searchString}`)) return true;
+		return false;
+		})
+  }
+  const numJobs = jobsList.length;
+  let numOfSteps = Math.ceil(numJobs/50);
+
+  jobsList = jobsList.slice(activeStep*50,(activeStep*50) + 50);
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+	setActiveStep((prevActiveStep) => prevActiveStep + 1);
+	scrollToTop();
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+	setActiveStep((prevActiveStep) => prevActiveStep - 1);
+	scrollToTop();
   };
   const starter: JobType = {
 	  title:"",
@@ -67,7 +115,7 @@ interface props<T> {
 									<div className="form-group">
 										<label>Job Title, Keywords, or Phrase</label>
 										<div className="input-group">
-											<input type="text" className="form-control" placeholder=""/>
+											<input type="text" className="form-control" value={searchString} placeholder="" onChange={handleSearch}/>
 											<div className="input-group-append">
 											  <span className="input-group-text"><i className="fa fa-search"></i></span>
 											</div>
@@ -76,9 +124,9 @@ interface props<T> {
 								</Grid>
 								<Grid item   alignItems="center" className="col-lg-3 col-md-6">
 									<div className="form-group">
-										<select>
-											<option>All</option>
-											<option>Remote</option>
+										<select onChange={handleTypeChange}>
+											<option value="all">All</option>
+											<option value="remote">Remote</option>
 										</select>
 									</div>
 								</Grid>
