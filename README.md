@@ -11,7 +11,7 @@ REACT, TYPESCRIPT, NODE(EXPRESS), REDIS
 ## Deployment
 To deploy bundle the code to js and purchase a server to run the app.
 1. Install ngnix to serve the app to the internet( remember to foward the internal port the app will run on (probably port 5000 when using serve) to port 80)
-2. Install node on the server and also npm
+2. Install node , npm and redis on the server
 3. Install pm2 globally - a process runner to run the different components of the app it could also help with load balancing.
 4. Install serve to run the client on pm2
 
